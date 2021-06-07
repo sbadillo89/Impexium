@@ -1,0 +1,49 @@
+﻿@page "/product/edit/{ProductId}"
+
+@inject IJSRuntime jsr
+@inject NavigationManager navigation
+@inject IProductRepository productRepository
+
+<FrmProducto Product ="@ProductToUpdate" Title="Edit Product" ButtonText="Save changes" OnValidSubmit="OnValidSubmit" />
+
+@code {
+
+    [Parameter]
+    public string ProductId { get; set; }
+
+    Product ProductToUpdate = new Product();
+
+    string token;
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        ProductToUpdate = await productRepository.GetByIdAsync(ProductId);
+
+        var userdata = await jsr.InvokeAsync<string>("localStorage.getItem", "token-impexium").ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(userdata))
+        {
+            token = Convert.ToString(userdata.Split(';', 3)[1]);
+            DateTime expireDate = Convert.ToDateTime(userdata.Split(';', 3)[2]);
+
+            if (DateTime.Now > expireDate)
+            {
+                await jsr.InvokeVoidAsync("localStorage.removeItem", "token-impexium").ConfigureAwait(false);
+            }
+
+        }
+
+    }
+
+    async Task OnValidSubmit()
+    {
+        bool updated = await productRepository.PutAsync(ProductToUpdate, ProductId, token);
+        if (updated)
+        {
+            navigation.NavigateTo("/product");
+        }
+    }
+
+}

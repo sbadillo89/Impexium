@@ -1,0 +1,66 @@
+﻿
+<div class="m-0 row align-content-center justify-content-center">
+    <div class="w-50 px-5 py-lg-5 shadow rounded-lg">
+
+        <h3 class="mb-5 text-danger">@Title</h3>
+
+        <EditForm Model="Product" OnValidSubmit="OnValidSubmit">
+
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label for="@Product.Name">Name</label>
+                <InputText type="text" class="form-control" @bind-Value="Product.Name" ></InputText>
+                <ValidationMessage For="@(() => Product.Name)" />
+            </div>
+
+            <div class="form-group">
+                <label for="@Product.Description">Description</label>
+                <InputText type="text" class="form-control" @bind-Value="Product.Description"></InputText>
+                <ValidationMessage For="@(() => Product.Description)" />
+            </div>
+
+            <div class="form-group">
+                <label for="@Product.Price">Price</label>
+                <InputNumber class="form-control" @bind-Value="Product.Price"></InputNumber>
+                <ValidationMessage For="@(() => Product.Price)" />
+            </div>
+
+            <div class="form-group">
+                <label for="@Product.Quantity">Quantity</label>
+                <InputNumber class="form-control" @bind-Value="Product.Quantity"></InputNumber>
+                <ValidationMessage For="@(() => Product.Quantity)" />
+            </div>
+
+            <div class="flex-row align-content-start justify-content-center mt-2">
+                <a href="/product" class="btn btn-warning oi:arrow-thick-left">Back</a>
+                <button type="submit" class="btn btn-danger oi:circle-check">@ButtonText</button>
+            </div>
+
+        </EditForm>
+
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Product Product { get; set; }
+
+    [Parameter]
+    public bool IsNew { get; set; }
+
+    [Parameter]
+    public string ButtonText { get; set; }
+
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+     
+    public FrmProducto()
+    { 
+    }
+}

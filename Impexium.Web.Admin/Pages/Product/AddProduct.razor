@@ -1,0 +1,43 @@
+﻿@page "/product/add"
+
+@inject IJSRuntime jsr
+@inject NavigationManager navigation
+@inject IProductRepository productRepository
+
+<FrmProducto Product="NewProduct" Title="Add Product" ButtonText="Save" IsNew="true" OnValidSubmit="OnSave" />
+
+@code {
+
+    public Product NewProduct = new Product();
+
+    string token;
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var userdata = await jsr.InvokeAsync<string>("localStorage.getItem", "token-impexium").ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(userdata))
+        {
+            token = Convert.ToString(userdata.Split(';', 3)[1]);
+            DateTime expireDate = Convert.ToDateTime(userdata.Split(';', 3)[2]);
+
+            if (DateTime.Now > expireDate)
+            {
+                await jsr.InvokeVoidAsync("localStorage.removeItem", "token-impexium").ConfigureAwait(false);
+            }
+        }
+    }
+
+    async Task OnSave()
+    {
+        var productCreated = await productRepository.PostAsync(NewProduct, token);
+        if (productCreated != null && productCreated.Id != Guid.Empty)
+        {
+            navigation.NavigateTo("/product");
+        }
+    }
+
+
+}

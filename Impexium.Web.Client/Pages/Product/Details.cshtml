@@ -1,0 +1,36 @@
+﻿@page
+@model web_app.Pages.Product.DetailsModel
+@{
+
+}
+
+
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center mt-lg-2">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded-lg w-50 d-flex justify-content-center align-items-center">
+            <div class="card-body">
+
+                <img src="https://source.unsplash.com/collection/410576/250x250" alt="" class="my-4 shadow-lg bg-dark" />
+
+                <h5 class="card-title flex-grow-1 text-center">@Model.Product.Name</h5>
+                <p class="card-text mb-3">@Model.Product.Description</p>
+
+
+                <div class="d-flex">
+                    <span class="text-danger mr-2">Price: </span>
+                    <p class="card-text text-danger font-weight-bold">US @Model.Product.Price</p>
+                </div>
+
+                <p>
+                    <span>Quantity available:</span>
+                    @Model.Product.Quantity
+                </p>
+
+                <div class="d-flex justify-content-center align-items-center mt-lg-4">
+                    <a asp-page="./Index" class=" btn btn-warning">Go Back</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

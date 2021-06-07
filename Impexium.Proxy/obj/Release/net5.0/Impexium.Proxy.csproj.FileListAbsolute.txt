@@ -1,0 +1,12 @@
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\bin\Release\net5.0\Impexium.Proxy.deps.json
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\bin\Release\net5.0\Impexium.Proxy.dll
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\bin\Release\net5.0\ref\Impexium.Proxy.dll
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\bin\Release\net5.0\Impexium.Proxy.pdb
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.csprojAssemblyReference.cache
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.AssemblyInfoInputs.cache
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.AssemblyInfo.cs
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.csproj.CoreCompileInputs.cache
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.dll
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\ref\Impexium.Proxy.dll
+C:\Users\SBadillo\source\repos\Impexium_Test\Impexium.Proxy\obj\Release\net5.0\Impexium.Proxy.pdb

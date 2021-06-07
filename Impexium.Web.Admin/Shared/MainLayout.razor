@@ -1,0 +1,64 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime jsr
+@inject NavigationManager navigationManager
+
+@if (IsLogged)
+{
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <div class="main">
+            <div class="top-row px-4 bg-danger">
+                @if (!string.IsNullOrEmpty(UserName))
+                {
+                    <NavLink class="nav-link text-white border-right border-white" href="#">
+                        <span class="oi oi-person mr-2" aria-hidden="true"> </span> <span>Hi, </span>
+                        <span class="text-capitalize">@UserName</span>
+                    </NavLink>
+                    <NavLink class="nav-link text-white" href="/logout">
+                        <span class="oi oi-account-logout" aria-hidden="true"> </span> Logout
+                    </NavLink>
+                }
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <Login></Login>
+}
+
+@code {
+    string UserName = string.Empty;
+    bool IsLogged = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var userdata = await jsr.InvokeAsync<string>("localStorage.getItem", "token-impexium").ConfigureAwait(false);
+        DateTime expireDate = DateTime.MinValue;
+        if (!string.IsNullOrEmpty(userdata))
+        {
+            IsLogged = true;
+            UserName = userdata.Split(';', 3)[0];
+            expireDate = Convert.ToDateTime(userdata.Split(';', 3)[2]);
+            if (DateTime.Now > expireDate)
+            {
+                await jsr.InvokeVoidAsync("localStorage.removeItem", "token-impexium").ConfigureAwait(false);
+
+                IsLogged = false;
+                navigationManager.NavigateTo("/", true);
+            }
+
+        }
+    }
+
+
+}
